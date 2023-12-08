@@ -1,0 +1,3 @@
+import libualg
+# print("hi")
+libualg.main()
