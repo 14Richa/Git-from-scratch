@@ -21,8 +21,7 @@ The project consists of:
    - `show_ref.py`
    - `hash_object.py`
    - `log.py`
-
-
+ 
 ## Implemented Commands and Their Functionalities
 
 1. Initialization (init command):
