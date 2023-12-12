@@ -7,7 +7,7 @@ This project showcases various Git commands designed to streamline version contr
 ## Project Structure
 
 ```
-├── ualg File # An executable file.
+├── ualg # An executable file.
 ├── Models
 │ ├── helper.py # Contains helper functions.
 │ └── models.py # Includes model implementations.
