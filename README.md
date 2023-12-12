@@ -5,7 +5,7 @@ This project showcases various Git commands designed to streamline version contr
 ## Implemented Commands and Their Functionalities
 
 1. Initialization (init command):
-    Enables the project repository's setup, establishing version control and preparing for further development.
+   Sets up a new, empty repository at a specified or default directory location, laying the groundwork for version control and subsequent development activities.
    
 2. File Information (cat-file command):
     Retrieves detailed commit information like associated tree, parent commit, author, committer, timestamp, and commit message without altering the repository.
