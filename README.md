@@ -4,22 +4,19 @@ This project showcases various Git commands designed to streamline version contr
 
 ## Project Overview
 
-The project consists of:
-
-- **ualg File**: An executable file.
-  
-- **models Folder**:
-  - `helper.py`: Contains helper functions.
-  - `models.py`: Includes model implementations.
-
-- **commands Folder**: Contains Python files implementing Git commands.
-   - `cat_file.py`
-   - `initialize.py`
-   - `ls_tree.py`
-   - `show_ref.py`
-   - `hash_object.py`
-   - `log.py`
-
+```
+├── ualg File # An executable file.
+├── Models
+│ ├── helper.py # Contains helper functions.
+│ └── models.py # Includes model implementations.
+└── Commands
+    ├── cat_file.py
+    ├── initialize.py
+    ├── ls_tree.py
+    ├── show_ref.py
+    ├── hash_object.py
+    └── log.py
+```
 
 ## Implemented Commands and Their Functionalities
 
