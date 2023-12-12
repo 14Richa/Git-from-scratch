@@ -1,8 +1,10 @@
 # Git from Scratch
 
+## Overview
+
 This project showcases various Git commands designed to streamline version control and enhance our development workflow. Each command serves a specific purpose, contributing to efficient codebase management.
 
-## Project Overview
+## Project Structure
 
 ```
 ├── ualg File # An executable file.
