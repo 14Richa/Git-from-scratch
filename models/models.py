@@ -453,3 +453,4 @@ def ref_list(repository, path=None):
             references[filename] = ref_resolve(repository, full_path)
 
     return references
+
