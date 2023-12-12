@@ -1,3 +1,33 @@
-import libualg
-# print("hi")
-libualg.main()
+import argparse
+from commands import initialize, cat_file, hash_object, log, ls_tree, show_ref
+
+argparser = argparse.ArgumentParser(description="A simple tool for tracking content")
+argsubparsers = argparser.add_subparsers(title="Commands", dest="command")
+argsubparsers.required = True
+
+initialize.add_init_subparser(argsubparsers)
+cat_file.add_cat_file_subparser(argsubparsers) 
+hash_object.add_hash_object_subparser(argsubparsers)
+log.add_log_subparser(argsubparsers)
+ls_tree.add_ls_tree_subparser(argsubparsers)
+show_ref.add_show_ref_subparser(argsubparsers)
+
+def main_execution():
+    # print("Hi from executable")
+    args = argparser.parse_args()
+    
+    if args.command == "init":
+        initialize.initialize_command(args)
+    elif args.command == "cat-file":
+        cat_file.cmd_cat_file(args)
+    elif args.command == "hash-object":
+        hash_object.hash_object_command(args)
+    elif args.command == "log":
+        log.log_command(args)
+    elif args.command == "ls-tree":
+        ls_tree.list_files_in_tree(args)
+    elif args.command == "show-ref":
+        show_ref.display_references(args)
+
+if __name__ == "__main__":
+    main_execution()
