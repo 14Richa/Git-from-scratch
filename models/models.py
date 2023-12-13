@@ -69,7 +69,6 @@ def repo_default_config():
 
     return serialized_data
 
-# Greedy recursion - Anurag
 def repo_find(path=".", required=True):
     path = os.path.realpath(path)
     # check if the .git directory exists within the path
@@ -102,7 +101,6 @@ class GitObject (object):
         pass
 
 # KVLM to mean Key-Value List with Message
-# Recursive Algorithm - Anurag
 def kvlm_parse(raw, start_index=0, dictionary=None):
     if not dictionary:
         dictionary = collections.OrderedDict()
@@ -216,7 +214,6 @@ def tree_leaf_sort_key(leaf):
     else:
         return leaf.path + "/"
 
-# Tree traversal algorithm (In Order / BFS) - Anurag    
 def tree_serialize(tree_object):
     tree_object.items.sort(key=tree_leaf_sort_key)
     serialized_tree = b''
@@ -265,8 +262,6 @@ def object_read(repository, commit_id):
             c = GitCommit
         elif object_type == b'tree':
             c = GitTree
-        # elif object_type == b'tag':
-        #     c = GitTag
         else:
             raise Exception("Unknown type {0} for object {1}".format(object_type.decode("ascii"), commit_id))
 
@@ -387,8 +382,6 @@ def object_hash(fd, object_type, repository=None):
         obj = GitCommit(data)
     elif object_type == b'tree':
         obj = GitTree(data)
-    # elif object_type == b'tag':
-    #     obj = GitTag(data)
     elif object_type == b'blob':
         obj = GitBlob(data)
     else:
