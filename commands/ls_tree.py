@@ -37,6 +37,4 @@ def get_item_type(mode):
         return "blob"  
     elif type_code == b'16':
         return "commit" 
-    else:
-        raise Exception(f"Weird tree leaf mode {mode}")
     
