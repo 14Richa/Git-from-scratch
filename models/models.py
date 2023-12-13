@@ -214,8 +214,46 @@ def tree_leaf_sort_key(leaf):
     else:
         return leaf.path + "/"
 
+# Merge Sort Algorithm
 def tree_serialize(tree_object):
-    tree_object.items.sort(key=tree_leaf_sort_key)
+
+    # Merge Sort Function
+    def merge_sort(arr):
+        if len(arr) <= 1:
+            return arr
+
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
+
+        left = merge_sort(left)
+        right = merge_sort(right)
+
+        return merge(left, right)
+
+    # Merge Function for Merge Sort
+    def merge(left, right):
+        result = []
+        i = j = 0
+
+        while i < len(left) and j < len(right):
+            # Comparison based on the tree_leaf_sort_key
+            if tree_leaf_sort_key(left[i]) < tree_leaf_sort_key(right[j]):
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+
+        # Appending remaining elements
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+
+    # Sorting operation using merge_sort function
+    tree_object.items = merge_sort(tree_object.items)
+
+    # Serialization of sorted items
     serialized_tree = b''
     for item in tree_object.items:
         serialized_tree += item.mode
@@ -224,6 +262,7 @@ def tree_serialize(tree_object):
         serialized_tree += b'\x00'
         sha_int = int(item.sha, 16)
         serialized_tree += sha_int.to_bytes(20, byteorder="big")
+
     return serialized_tree
 
 class GitTree(GitObject):
