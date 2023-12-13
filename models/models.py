@@ -309,7 +309,6 @@ def object_read(repository, commit_id):
         return c(raw[y + 1:])
 
 def create_transition_matrix(data, num_states=256):
-    """ Create a transition matrix based on input data. """
     matrix = np.zeros((num_states, num_states))
     for i in range(len(data) - 1):
         current_state = data[i] % num_states
@@ -326,8 +325,7 @@ def create_transition_matrix(data, num_states=256):
 
     return matrix
 
-def markov_hash(data, hash_length=8, num_states=256):
-    """ Generate a hash using a Markov Chain. """
+def markov_hash(data, hash_length=8, num_states=256): # Generate a hash using a Markov Chain.
     if not data:
         return ""
 
