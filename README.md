@@ -39,3 +39,30 @@ This project showcases various Git commands designed to streamline version contr
 
 6. List References (show-ref command):
     Displays repository references (branches, tags, etc.) alongside their respective commit hashes, aiding in understanding and tracking the repository's structure.
+
+## Running Commands 
+
+**Initialization (init command)** : To initialize a new repository
+
+```$ ./ualg init <directory> ``` 
+
+**File Information (cat-file command)** : To retrieve detailed commit information
+
+```$ ./ualg cat-file -commit <commit-hash>```
+
+**Object Hashing (hash-object command)** : To generate unique identifiers for files
+
+```$ ./ualg hash-object <file>```
+
+**Listing Files (ls-tree command)** : To view files and directories in the repository
+
+``` $ ./ualg ls-tree -r <branch>```
+
+**List References (show-ref command)** : To display repository references and their commit hashes
+
+``` $ ./ualg show-ref```
+
+**Commit History (log command)** : To generate a visual commit history representation
+
+- Generate the log file: ```$ ./ualg log > log.dot ```
+- Convert the log file to PDF using Graphviz: ```$ dot -O -Tpdf log.dot```
