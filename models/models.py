@@ -6,6 +6,8 @@ import hashlib
 import zlib
 import re
 import collections
+import numpy as np
+
 
 
 
@@ -306,6 +308,47 @@ def object_read(repository, commit_id):
 
         return c(raw[y + 1:])
 
+def create_transition_matrix(data, num_states=256):
+    """ Create a transition matrix based on input data. """
+    matrix = np.zeros((num_states, num_states))
+    for i in range(len(data) - 1):
+        current_state = data[i] % num_states
+        next_state = data[i + 1] % num_states
+        matrix[current_state][next_state] += 1
+
+    # Normalize the matrix and handle rows that sum to 0
+    for row in matrix:
+        total = np.sum(row)
+        if total > 0:
+            row[:] = [x / total for x in row]
+        else:
+            row[:] = [1 / num_states for _ in row]  # Uniform distribution
+
+    return matrix
+
+def markov_hash(data, hash_length=8, num_states=256):
+    """ Generate a hash using a Markov Chain. """
+    if not data:
+        return ""
+
+    # Convert data to byte array if it's a string
+    if isinstance(data, str):
+        data = data.encode()
+
+    hash_result = []
+    transition_matrix = create_transition_matrix(data, num_states)
+    print(transition_matrix)
+
+    for _ in range(hash_length):
+        state = np.random.randint(num_states)
+        for byte in data:
+            next_state = np.random.choice(num_states, p=transition_matrix[state])
+            state = next_state
+
+        hash_result.append(state)
+
+    return ''.join(format(x, '02x') for x in hash_result)
+
 
 def object_write(obj, repository=None):
     # Serialize object data
@@ -313,7 +356,8 @@ def object_write(obj, repository=None):
     # Add header
     result = obj.object_type + b' ' + str(len(data)).encode() + b'\x00' + data
     # Compute hash
-    commit_id = hashlib.sha1(result).hexdigest() # This can be done manually using any markov chain algorithm
+    # commit_id = hashlib.sha1(result).hexdigest()
+    commit_id = markov_hash(result)
 
     if repository:
         # Compute path
